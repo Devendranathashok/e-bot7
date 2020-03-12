@@ -1,0 +1,30 @@
+    1  apt-get update
+    2  apt-get install ruby
+    3  gem install fluentd
+    4  apt-get install ruby-dev
+    5  gem install fluentd
+    6  gem install try_cpp
+    7  cat /var/lib/gems/2.5.0/extensions/x86_64-linux/2.5.0/msgpack-1.3.3/mkmf.log
+    8  apt-get update
+    9  apt-get install gcc
+   10  gem install fluentd
+   11  apt-get install make
+   12  gem install fluentd
+   13  gem install fluent-plugin-mongo
+   14  vim fluentd.conf
+   15  sudo apt-get update
+   16  apt-get udpate
+   17  apt-get update
+   18  apt-get install vim
+   19  vim fluentd.conf
+   20  mkdir /lgo
+   21  mkdir /log
+   22  mkdir /td-agent
+   23  vim /log/access.log
+   24  cat fluentd.conf
+   25  ls /log/access.log
+   26  touch /td-agent/access.log.pos
+   27  fluentd -c fluentd.conf
+   28  cat log/access.log
+   29  ls
+   30  history

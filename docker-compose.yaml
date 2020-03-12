@@ -1,0 +1,65 @@
+version: "2"
+services:
+        nginxdemo:
+                image: devendranathashok/nginxdemo:0.1
+                restart: always
+                container_name: nginxweb
+                hostname: nginx.ashok.local
+                networks:
+                        app_net:
+                                ipv4_address: 172.34.0.2
+                ports:
+                        - 80:80
+                volumes:
+                        - /log:/var/log/nginx
+
+        mongo:
+                image: mongo
+                restart: always
+                container_name: mongodb
+                depends_on:
+                        - nginxdemo
+                hostname: mongo.ashok.local
+                networks:
+                        app_net:
+                                ipv4_address: 172.34.0.3
+                ports:
+                        - 27017:27017
+                          
+         
+        fluentd:
+                image: devendranathashok/fluentdemo:0.2
+                restart: always
+                container_name: fluentdservice
+                depends_on:
+                        - mongo
+                hostname: fluentd.ashok.local
+                networks:
+                        app_net:
+                                ipv4_address: 172.34.0.4
+                volumes:
+                        - /log:/log
+                
+        emailnotify:
+                image: devendranathashok/emailnotify:0.3
+                restart: always
+                container_name: emailnotify
+                depends_on:
+                        - mongo
+                hostname: emailnotify.ashok.local
+                networks:
+                        app_net:
+                                ipv4_address: 172.34.0.5
+
+
+        
+networks:
+        app_net:
+                driver: bridge
+                driver_opts:
+                        com.docker.network.enable_ipv6: "false"
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.34.0.0/24
+                                  gateway: 172.34.0.1
